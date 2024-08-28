@@ -4,18 +4,36 @@ namespace Questao1
 {
     public class ContaBancaria {
 
-        public int NumeroConta { get; }
-        public string Nome { get; set; }
+        public int NumeroConta { get; private set; }
+        public string Nome { get; private set; }
         public double Saldo { get; private set; }
 
         public ContaBancaria(int numeroConta, string nome, double depositoInicial = 0.00)
         {
-            Nome = nome;
-            NumeroConta = numeroConta;
-            Saldo = depositoInicial;
+            SetNumeroConta(numeroConta);
+            SetNome(nome);
+            RealizaDeposito(depositoInicial);
         }
 
-        public void Deposito(double quantia)
+        public void SetNumeroConta(int numeroConta)
+        {
+            if (numeroConta <= 0)
+            {
+                throw new ArgumentException("Número da conta inválido");
+            }
+            NumeroConta = numeroConta;
+        }
+
+        public void SetNome(string nome)
+        {
+            if (string.IsNullOrWhiteSpace(nome))
+            {
+                throw new ArgumentException("O nome deve ser informado");
+            }
+            Nome = nome;
+        }
+
+        public void RealizaDeposito(double quantia)
         {
             if (quantia < 0)
             {
@@ -25,7 +43,7 @@ namespace Questao1
             Saldo += quantia;
         }
 
-        public void Saque(double quantia)
+        public void RealizaSaque(double quantia)
         {
             const double taxa = 3.50;
 
@@ -39,6 +57,6 @@ namespace Questao1
         }
 
         public override string ToString()
-            => $"Conta {NumeroConta}, Titular: {Nome}, Saldo: $ {string.Format("{0:C}", Saldo)}";
+            => $"Conta {NumeroConta}, Titular: {Nome}, Saldo: $ {string.Format("{0:N2}", Saldo)}";
     }
 }
