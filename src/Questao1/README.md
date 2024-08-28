@@ -1,64 +1,74 @@
-## Quest„o 1
+## Quest√£o 1
 
 # Enunciado
 
-Uma instituiÁ„o financeira solicita que para cadastrar uma conta banc·ria, È necess·rio informar:
-ï	o n˙mero da conta, 
-ï	o nome do titular da conta, 
-ï	e o valor de depÛsito inicial que o titular depositou ao abrir a conta.
+Uma institui√ß√£o financeira solicita que para cadastrar uma conta banc√°ria, √© necess√°rio informar:
 
-O valor de depÛsito inicial, È opcional, ou seja: 
-ï	se o titular n„o tiver dinheiro a depositar no momento de abrir sua conta, o depÛsito inicial n„o ser· feito e o saldo inicial da conta ser·, naturalmente, zero.
+* o n√∫mero da conta 
+*	o nome do titular da conta 
+*	e o valor de dep√≥sito inicial que o titular depositou ao abrir a conta.
 
-Importante: ApÛs a conta ser aberta, o n˙mero da conta nunca poder· ser alterado. J· o nome do titular pode ser alterado (pois uma pessoa pode mudar de nome quando contrai matrimÙnio por exemplo).
+O valor de dep√≥sito inicial, √© opcional, ou seja: 
+*	se o titular n√£o tiver dinheiro a depositar no momento de abrir sua conta, o dep√≥sito inicial n√£o ser√° feito e o saldo inicial da conta ser√°, naturalmente, zero.
 
-O saldo da conta n„o pode ser alterado livremente. … preciso haver um mecanismo para proteger isso. 
+Importante: Ap√≥s a conta ser aberta, o n√∫mero da conta nunca poder√° ser alterado. J√° o nome do titular pode ser alterado (pois uma pessoa pode mudar de nome quando contrai matrim√¥nio por exemplo).
 
-O saldo sÛ aumenta por meio de depÛsitos, e sÛ diminui por meio de saques. 
+O saldo da conta n√£o pode ser alterado livremente. √â preciso haver um mecanismo para proteger isso. 
 
-Para cada saque realizado, a instituiÁ„o cobra uma taxa de $ 3.50. 
+O saldo s√≥ aumenta por meio de dep√≥sitos, e s√≥ diminui por meio de saques. 
 
-ObservaÁ„o: a conta pode ficar com saldo negativo se o saldo n„o for suficiente para realizar o saque e/ou pagar a taxa.
+Para cada saque realizado, a institui√ß√£o cobra uma taxa de $ 3.50. 
 
-Disponibilizamos um programa que solicita os dados de cadastro da conta, dando opÁ„o para que seja ou n„o
-informado o valor de depÛsito inicial. Em seguida, realizar um depÛsito e depois um saque, sempre
-mostrando os dados da conta apÛs cada operaÁ„o.
+Observa√ß√£o: a conta pode ficar com saldo negativo se o saldo n√£o for suficiente para realizar o saque e/ou pagar a taxa.
 
-VocÍ deve implementar a classe ìContaBancariaî para que o programa funcione conforme dois cen·rios de teste abaixo:
+Disponibilizamos um programa que solicita os dados de cadastro da conta, dando op√ß√£o para que seja ou n√£o
+informado o valor de dep√≥sito inicial. Em seguida, realizar um dep√≥sito e depois um saque, sempre
+mostrando os dados da conta ap√≥s cada opera√ß√£o.
 
-Exemplo 1:
+Voc√™ deve implementar a classe ‚ÄúContaBancaria‚Äù para que o programa funcione conforme dois cen√°rios de teste abaixo:
 
-Entre o n˙mero da conta: 5447
-Entre o titular da conta: Milton GonÁalves
-Haver· depÛsito inicial (s/n)? s
-Entre o valor de depÛsito inicial: 350.00
+**Exemplo 1:**
 
-Dados da conta:
-Conta 5447, Titular: Milton GonÁalves, Saldo: $ 350.00
+1. Entre o n√∫mero da conta: 5447
+2. Entre o titular da conta: Milton Gon√ßalves
+3. Haver√° dep√≥sito inicial (s/n)? s
+4. Entre o valor de dep√≥sito inicial: 350.00
 
-Entre um valor para depÛsito: 200
-Dados da conta atualizados:
-Conta 5447, Titular: Milton GonÁalves, Saldo: $ 550.00
+* Dados da conta:
+Conta 5447, Titular: Milton Gon√ßalves, Saldo: $ 350.00
 
-Entre um valor para saque: 199
-Dados da conta atualizados:
-Conta 5447, Titular: Milton GonÁalves, Saldo: $ 347.50
+5. Entre um valor para dep√≥sito: 200
+* Dados da conta atualizados:
+Conta 5447, Titular: Milton Gon√ßalves, Saldo: $ 550.00
 
-Exemplo 2:
-Entre o n˙mero da conta: 5139
-Entre o titular da conta: Elza Soares
-Haver· depÛsito inicial (s/n)? n
+6. Entre um valor para saque: 199
+* Dados da conta atualizados:
+Conta 5447, Titular: Milton Gon√ßalves, Saldo: $ 347.50
 
-Dados da conta:
+**Exemplo 2:**
+
+1. Entre o n√∫mero da conta: 5139
+2. Entre o titular da conta: Elza Soares
+3. Haver√° dep√≥sito inicial (s/n)? n
+
+* Dados da conta:
 Conta 5139, Titular: Elza Soares, Saldo: $ 0.00
 
-Entre um valor para depÛsito: 300.00
-Dados da conta atualizados:
+4. Entre um valor para dep√≥sito: 300.00
+* Dados da conta atualizados:
 Conta 5139, Titular: Elza Soares, Saldo: $ 300.00
 
-Entre um valor para saque: 298.00
-Dados da conta atualizados:
+5. Entre um valor para saque: 298.00
+* Dados da conta atualizados:
 Conta 5139, Titular: Elza Soares, Saldo: $ -1.50
 
 
 # Resposta
+
+**Exemplo 1:**
+![image](https://github.com/user-attachments/assets/984a1b53-8aef-48f2-9855-2b256ce1bfa9)
+
+**Exemplo 2:**
+![image](https://github.com/user-attachments/assets/78815ee2-5048-4e33-83f7-ddabd91d4bf3)
+
+
