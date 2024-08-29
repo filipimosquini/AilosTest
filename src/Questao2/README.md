@@ -1,74 +1,47 @@
-## Questão 1
+## Questão 2
+
+# Observações
+
+1. Os valores retornados pela API estão diferentes dos valores esperados.
+2. Para este exercício, foram utilizados as bibliotecas SimpleInjector, RestSharp e Newtonsoft.Json
+3. A arquitetura do projeto foi pensada com base na arquitetura três camadas.
 
 # Enunciado
 
-Uma instituição financeira solicita que para cadastrar uma conta bancária, é necessário informar:
+Necessitamos que você desenvolva uma aplicação que calcule a quantidade de gols marcados por time em um ano.
 
-* o número da conta 
-*	o nome do titular da conta 
-*	e o valor de depósito inicial que o titular depositou ao abrir a conta.
+Os dados de todas as partidas são disponibilizados por uma API e podem ser filtrados passando parâmetros com os próprios campos que são retornados:
 
-O valor de depósito inicial, é opcional, ou seja: 
-*	se o titular não tiver dinheiro a depositar no momento de abrir sua conta, o depósito inicial não será feito e o saldo inicial da conta será, naturalmente, zero.
+Método: GET
+URL API: https://jsonmock.hackerrank.com/api/football_matches
 
-Importante: Após a conta ser aberta, o número da conta nunca poderá ser alterado. Já o nome do titular pode ser alterado (pois uma pessoa pode mudar de nome quando contrai matrimônio por exemplo).
+Parâmetros opcionais que podem ser utilizados:
+year – int – Filtra o ano de pesquisa
+team1 – string – Filtra o nome do time 1 da partida
+team2 – string – Filtra o nome do time 2 da partida
+page – int – Filtra o número da página de resultados
 
-O saldo da conta não pode ser alterado livremente. É preciso haver um mecanismo para proteger isso. 
+Exemplo de requisição:
+https://jsonmock.hackerrank.com/api/football_matches?year=2015&team1=Galatasaray
 
-O saldo só aumenta por meio de depósitos, e só diminui por meio de saques. 
+O programa deve retornar 2 resultados:
 
-Para cada saque realizado, a instituição cobra uma taxa de $ 3.50. 
+Resultado 1:
+Time: Paris Saint-Germain
+Ano: 2013
 
-Observação: a conta pode ficar com saldo negativo se o saldo não for suficiente para realizar o saque e/ou pagar a taxa.
+Resultado 2:
+Time: Chelsea
+Ano: 2014
 
-Disponibilizamos um programa que solicita os dados de cadastro da conta, dando opção para que seja ou não
-informado o valor de depósito inicial. Em seguida, realizar um depósito e depois um saque, sempre
-mostrando os dados da conta após cada operação.
-
-Você deve implementar a classe “ContaBancaria” para que o programa funcione conforme dois cenários de teste abaixo:
-
-**Exemplo 1:**
-
-1. Entre o número da conta: 5447
-2. Entre o titular da conta: Milton Gonçalves
-3. Haverá depósito inicial (s/n)? s
-4. Entre o valor de depósito inicial: 350.00
-
-* Dados da conta:
-Conta 5447, Titular: Milton Gonçalves, Saldo: $ 350.00
-
-5. Entre um valor para depósito: 200
-* Dados da conta atualizados:
-Conta 5447, Titular: Milton Gonçalves, Saldo: $ 550.00
-
-6. Entre um valor para saque: 199
-* Dados da conta atualizados:
-Conta 5447, Titular: Milton Gonçalves, Saldo: $ 347.50
-
-**Exemplo 2:**
-
-1. Entre o número da conta: 5139
-2. Entre o titular da conta: Elza Soares
-3. Haverá depósito inicial (s/n)? n
-
-* Dados da conta:
-Conta 5139, Titular: Elza Soares, Saldo: $ 0.00
-
-4. Entre um valor para depósito: 300.00
-* Dados da conta atualizados:
-Conta 5139, Titular: Elza Soares, Saldo: $ 300.00
-
-5. Entre um valor para saque: 298.00
-* Dados da conta atualizados:
-Conta 5139, Titular: Elza Soares, Saldo: $ -1.50
+Resultado esperado:
+Team Paris Saint - Germain scored 109 goals in 2013
+Team Chelsea scored 92 goals in 2014
 
 
 # Resposta
 
-**Exemplo 1:**
-![image](https://github.com/user-attachments/assets/984a1b53-8aef-48f2-9855-2b256ce1bfa9)
-
-**Exemplo 2:**
-![image](https://github.com/user-attachments/assets/78815ee2-5048-4e33-83f7-ddabd91d4bf3)
+**Exemplo 1 e 2:**
+![image](https://github.com/user-attachments/assets/d907a758-a524-4de3-af00-c566d42ead10)
 
 
