@@ -1,47 +1,53 @@
-## Questão 2
-
-# Observações
-
-1. Os valores retornados pela API estão diferentes dos valores esperados.
-2. Para este exercício, foram utilizados as bibliotecas SimpleInjector, RestSharp e Newtonsoft.Json
-3. A arquitetura do projeto foi pensada com base na arquitetura três camadas.
+## Questão 3
 
 # Enunciado
 
-Necessitamos que você desenvolva uma aplicação que calcule a quantidade de gols marcados por time em um ano.
+Nesta questão vamos usar o Git e um editor de texto (nano), você pode realizar uma sequência de comandos em um diretório da sua máquina local, seguindo a sequência definida no exercício. 
 
-Os dados de todas as partidas são disponibilizados por uma API e podem ser filtrados passando parâmetros com os próprios campos que são retornados:
+Nessa sequência, o nano representa a abertura de um editor de texto para criar/editar o arquivo especificado como argumento e você deve salvar no arquivo um conteúdo qualquer, que foi salvo em disco antes de prosseguir com o próximo comando:
 
-Método: GET
-URL API: https://jsonmock.hackerrank.com/api/football_matches
+```
+git init
 
-Parâmetros opcionais que podem ser utilizados:
-year – int – Filtra o ano de pesquisa
-team1 – string – Filtra o nome do time 1 da partida
-team2 – string – Filtra o nome do time 2 da partida
-page – int – Filtra o número da página de resultados
+nano README.md
 
-Exemplo de requisição:
-https://jsonmock.hackerrank.com/api/football_matches?year=2015&team1=Galatasaray
+nano default.html
 
-O programa deve retornar 2 resultados:
+git add .
 
-Resultado 1:
-Time: Paris Saint-Germain
-Ano: 2013
+git commit -m "Commit 1"
 
-Resultado 2:
-Time: Chelsea
-Ano: 2014
+git rm default.html
 
-Resultado esperado:
-Team Paris Saint - Germain scored 109 goals in 2013
-Team Chelsea scored 92 goals in 2014
+nano style.css
+
+git add style.css
+
+git commit -m "Commit 2"
+
+git checkout -b testing
+
+nano script.js
+
+git add *.js
+
+git commit -m "Commit 3"
+
+git checkout master
+```
+
+Ao final dessa sequência de comandos, os arquivos que se encontram em seu diretório de trabalho, além do README.md, é/são:
+
+*	[      ] script.js e style.css, apenas.
+*	[      ] default.html e style.css, apenas.
+*	[      ] style.css, apenas.
+*	[      ] default.html e script.js, apenas.
+*	[      ] default.html, script.js e style.css.
 
 
 # Resposta
 
-**Exemplo 1 e 2:**
-![image](https://github.com/user-attachments/assets/d907a758-a524-4de3-af00-c566d42ead10)
+[  x  ] style.css, apenas.
+
 
 
