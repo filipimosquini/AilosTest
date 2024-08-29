@@ -1,47 +1,67 @@
-## Questão 2
-
-# Observações
-
-1. Os valores retornados pela API estão diferentes dos valores esperados.
-2. Para este exercício, foram utilizados as bibliotecas SimpleInjector, RestSharp e Newtonsoft.Json
-3. A arquitetura do projeto foi pensada com base na arquitetura três camadas.
+## Questão 4
 
 # Enunciado
 
-Necessitamos que você desenvolva uma aplicação que calcule a quantidade de gols marcados por time em um ano.
+Uma empresa registra os atendimentos por assunto e por ano em uma tabela.
 
-Os dados de todas as partidas são disponibilizados por uma API e podem ser filtrados passando parâmetros com os próprios campos que são retornados:
+Você precisa escrever um comando select que retorne o assunto, o ano e a quantidade de ocorrências, filtrando apenas assuntos que tenham mais de 3 ocorrências no mesmo ano.
 
-Método: GET
-URL API: https://jsonmock.hackerrank.com/api/football_matches
+O comando deve ordenar os registros por ANO e por QUANTIDADE de ocorrências de forma DECRESCENTE.
 
-Parâmetros opcionais que podem ser utilizados:
-year – int – Filtra o ano de pesquisa
-team1 – string – Filtra o nome do time 1 da partida
-team2 – string – Filtra o nome do time 2 da partida
-page – int – Filtra o número da página de resultados
+![image](https://github.com/user-attachments/assets/b8f5579c-c4b7-4d3f-8d8c-b085224f029b)
 
-Exemplo de requisição:
-https://jsonmock.hackerrank.com/api/football_matches?year=2015&team1=Galatasaray
+**Resultado esperado:**
 
-O programa deve retornar 2 resultados:
+![image](https://github.com/user-attachments/assets/866596d4-dfe7-4937-acc7-ef116918246e)
 
-Resultado 1:
-Time: Paris Saint-Germain
-Ano: 2013
+**Comandos para criação da tabela e inserção dos registros:**
 
-Resultado 2:
-Time: Chelsea
-Ano: 2014
+```
+-- ORACLE
+CREATE TABLE atendimentos (
+ id  RAW(16) DEFAULT SYS_GUID() NOT NULL,
+ assunto VARCHAR2(100) NOT NULL,
+ ano NUMBER(4)
+);
 
-Resultado esperado:
-Team Paris Saint - Germain scored 109 goals in 2013
-Team Chelsea scored 92 goals in 2014
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao atendimento','2021');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao produto','2021');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao produto','2021');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao cadastro','2021');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao atendimento','2021');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao produto','2021');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao produto','2021');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao produto','2021');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao produto','2021');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao atendimento','2021');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao atendimento','2021');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao produto','2022');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao produto','2022');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao atendimento','2022');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao atendimento','2022');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao atendimento','2022');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao cadastro','2022');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao cadastro','2022');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao cadastro','2022');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao cadastro','2022');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao cadastro','2022');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao cadastro','2022');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao cadastro','2022');
+INSERT INTO atendimentos (assunto, ano) VALUES ('Reclamacao cadastro','2022');
+COMMIT;
 
+```
 
 # Resposta
 
-**Exemplo 1 e 2:**
-![image](https://github.com/user-attachments/assets/d907a758-a524-4de3-af00-c566d42ead10)
+```
+SELECT A.ASSUNTO, A.ANO, COUNT(1) AS "QUANTIDADE"
+FROM ATENDIMENTOS A
+GROUP BY A.ANO, A.ASSUNTO
+HAVING COUNT(1) > 3
+ORDER BY A.ANO DESC, COUNT(1) DESC;
 
+```
+
+![image](https://github.com/user-attachments/assets/54a4f269-11a5-4b83-9d3c-251be45c441b)
 
