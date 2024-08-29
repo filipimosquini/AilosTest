@@ -63,5 +63,6 @@ ORDER BY A.ANO DESC, COUNT(1) DESC;
 
 ```
 
-![image](https://github.com/user-attachments/assets/54a4f269-11a5-4b83-9d3c-251be45c441b)
+![image](https://github.com/user-attachments/assets/a2a25624-d05f-4a57-920d-69ed04826c49)
+
 
