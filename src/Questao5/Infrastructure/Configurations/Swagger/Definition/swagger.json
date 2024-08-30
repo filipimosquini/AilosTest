@@ -1,0 +1,175 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Movements API",
+    "description": "API that provides endpoints for movements services.",
+    "contact": {
+      "name": "Filipi Mosquini",
+      "email": "mosquinilabs@gmail.com"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/api/movements": {
+      "post": {
+        "tags": [
+          "Movement"
+        ],
+        "summary": "api/movements.",
+        "description": "<p>\r\n  <b> Desciption: </b>\r\n  <br />\r\n            This method create a movement. <br /></p>\r\n<p>\r\n  <b> Requirements: </b>\r\n  <br />\r\n            Not Exists. <br /></p>",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMovementCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMovementCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMovementCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateMovementCommandResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateMovementCommandResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateMovementCommandResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request\r\n            <ul><li>Inactive.Account</li><li>Invalid.AccountId</li><li>Invalid.Amount</li><li>Invalid.MovementType</li><li>Invalid.RequestId</li><li>NotFound.Account</li></ul>"
+          },
+          "500": {
+            "description": "InternalServerError\r\n            <ul><li>Error.Unexpected</li></ul>"
+          }
+        }
+      }
+    },
+    "/api/movements/balances": {
+      "get": {
+        "tags": [
+          "Movement"
+        ],
+        "summary": "api/movements/balances.",
+        "description": "<p>\r\n  <b> Desciption: </b>\r\n  <br />\r\n            This method get a balance result. <br /></p>\r\n<p>\r\n  <b> Requirements: </b>\r\n  <br />\r\n            Not Exists. <br /></p>",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetBalanceQuery"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetBalanceQuery"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetBalanceQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBalanceQueryResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBalanceQueryResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBalanceQueryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request\r\n           <ul><li> Inactive.Account </li><li> NotFound.Account </li></ul>"
+          },
+          "500": {
+            "description": "InternalServerError\r\n           <ul><li> Error.Unexpected </li></ul>"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateMovementCommand": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "nullable": true
+          },
+          "accountId": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "movementType": {
+            "$ref": "#/components/schemas/MovementTypeEnum"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateMovementCommandResponse": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "GetBalanceQuery": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "GetBalanceQueryResponse": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "MovementTypeEnum": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      }
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "messages": [
+    {
+      "Key": "UNEXPECTED_ERROR",
+      "values": [
+        {
+          "value": {
+            "code": "Error.Unexpected",
+            "message": "An unexpected error has occurred."
+          }
+        }
+      ]
+    },
+    {
+      "Key": "INVALID_ACCOUNT_ID",
+      "values": [
+        {
+          "value": {
+            "code": "Invalid.AccountId",
+            "message": "Field 'AccountId' invalid."
+          }
+        }
+      ]
+    },
+    {
+      "Key": "INVALID_ACCOUNT",
+      "values": [
+        {
+          "value": {
+            "code": "NotFound.Account",
+            "message": "Account not found or not registered."
+          }
+        }
+      ]
+    },
+    {
+      "Key": "INACTIVE_ACCOUNT",
+      "values": [
+        {
+          "value": {
+            "code": "Inactive.Account",
+            "message": "Account is inactive."
+          }
+        }
+      ]
+    },
+    {
+      "Key": "INVALID_REQUEST_ID",
+      "values": [
+        {
+          "value": {
+            "code": "Invalid.RequestId",
+            "message": "Field 'RequestId' invalid."
+          }
+        }
+      ]
+    },
+    {
+      "Key": "INVALID_VALUE",
+      "values": [
+        {
+          "value": {
+            "code": "Invalid.Amount",
+            "message": "Just positive amount values are acceptable"
+          }
+        }
+      ]
+    },
+    {
+      "Key": "INVALID_TYPE",
+      "values": [
+        {
+          "value": {
+            "code": "Invalid.MovementType",
+            "message": "Field 'Movementtype' invalid"
+          }
+        }
+      ]
+    }
+  ]
+}
