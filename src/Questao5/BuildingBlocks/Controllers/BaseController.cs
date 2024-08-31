@@ -7,11 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Questao5.Infrastructure.CrossCutting.MessageCatalogs.Interfaces;
-using Questao5.Infrastructure.CrossCutting.MessageCatalogs.Models;
-using Questao5.Infrastructure.Configurations.Exceptions;
+using Questao5.BuildingBlocks.Exceptions;
+using Questao5.BuildingBlocks.CrossCutting.MessageCatalogs.Interfaces;
+using Questao5.BuildingBlocks.CrossCutting.MessageCatalogs.Models;
 
-namespace Questao5.Infrastructure.Configurations.Controllers;
+namespace Questao5.BuildingBlocks.Controllers;
 
 /// <summary>
 /// Base controller class.
@@ -26,7 +26,7 @@ public abstract class BaseController<T> : Controller
     /// <summary>
     /// Gets the message catalog.
     /// </summary>
-    protected IMessageCatalog _messageCatalog { get; } 
+    protected IMessageCatalog _messageCatalog { get; }
 
     protected BaseController(IMediator mediatorService, IMessageCatalog messageCatalog)
     {
@@ -86,9 +86,9 @@ public abstract class BaseController<T> : Controller
     /// <returns></returns>
     private IActionResult HandleFatalError()
     {
-        return StatusCode((int) HttpStatusCode.InternalServerError, new
+        return StatusCode((int)HttpStatusCode.InternalServerError, new
         {
-            notifications = this._messageCatalog.Get("UNEXPECTED_ERROR")
+            notifications = _messageCatalog.Get("UNEXPECTED_ERROR")
         });
     }
 
@@ -105,7 +105,7 @@ public abstract class BaseController<T> : Controller
         }
 
         var _notifications = new List<Notification>();
-        var notificationsFromFile = this._messageCatalog.Get(exception.Message) ?? this._messageCatalog.Get("UNEXPECTED_ERROR");
+        var notificationsFromFile = _messageCatalog.Get(exception.Message) ?? _messageCatalog.Get("UNEXPECTED_ERROR");
 
         if (notificationsFromFile.Any())
         {
@@ -133,10 +133,10 @@ public abstract class BaseController<T> : Controller
     private IActionResult HandleValidationException(ValidationException exception)
     {
         var _notifications = new List<Notification>();
-        
+
         foreach (ValidationFailure error in exception.Errors)
         {
-            var notificationsFromFile = this._messageCatalog.Get(error.ErrorCode);
+            var notificationsFromFile = _messageCatalog.Get(error.ErrorCode);
 
             if (notificationsFromFile.Any())
             {

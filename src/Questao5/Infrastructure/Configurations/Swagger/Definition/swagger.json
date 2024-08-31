@@ -14,7 +14,7 @@
     "version": "v1"
   },
   "paths": {
-    "/api/movements": {
+    "/api/banks/movements": {
       "post": {
         "tags": [
           "Movement"
@@ -76,7 +76,7 @@
         }
       }
     },
-    "/api/movements/balances": {
+    "/api/banks/movements/balances": {
       "get": {
         "tags": [
           "Movement"
@@ -87,6 +87,7 @@
           {
             "name": "AccountNumber",
             "in": "query",
+            "description": "The bank account number",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -115,7 +116,10 @@
             }
           },
           "400": {
-            "description": "Bad Request\r\n           <ul><li>Inactive.Account</li><li>Invalid.AccountNumber</li><li>NotFound.Account</li></ul>"
+            "description": "Bad Request\r\n           <ul><li>Inactive.Account</li><li>Invalid.AccountNumber</li></ul>"
+          },
+          "404": {
+            "description": "Not Found\r\n            <ul><li>NotFound.Account</li></ul>"
           },
           "500": {
             "description": "InternalServerError\r\n           <ul><li> Error.Unexpected </li></ul>"
@@ -131,18 +135,22 @@
         "properties": {
           "requestId": {
             "type": "string",
+            "description": "The request Id",
             "nullable": true
           },
           "accountNumber": {
             "type": "integer",
+            "description": "The bank account number",
             "format": "int32"
           },
           "amount": {
             "type": "number",
+            "description": "The amount of bank movement",
             "format": "double"
           },
           "movementType": {
             "type": "string",
+            "description": "The Movement Types.\r\nThe accepted values is [C] Credit or [D] Debit",
             "nullable": true
           }
         },
@@ -153,6 +161,7 @@
         "properties": {
           "movementId": {
             "type": "string",
+            "description": "The movement id generated after store a bank movement",
             "format": "uuid"
           }
         },
@@ -163,18 +172,22 @@
         "properties": {
           "accountNumber": {
             "type": "integer",
+            "description": "The bank account number",
             "format": "int32"
           },
           "holder": {
             "type": "string",
+            "description": "The holder of bank account",
             "nullable": true
           },
           "queryDate": {
             "type": "string",
+            "description": "A datetime when query occurs",
             "format": "date-time"
           },
           "balance": {
             "type": "number",
+            "description": "The balance of bank movements",
             "format": "double"
           }
         },

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Questao5.Infrastructure.Configurations.Exceptions;
+namespace Questao5.BuildingBlocks.Exceptions;
 
 public class AppCustomException : Exception
 {

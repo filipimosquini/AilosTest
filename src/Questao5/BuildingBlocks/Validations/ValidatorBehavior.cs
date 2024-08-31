@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Questao5.Infrastructure.Configurations.Validations;
+namespace Questao5.BuildingBlocks.Validations;
 
 /// <summary>
 /// Validator behavior for mediator pipeline class.

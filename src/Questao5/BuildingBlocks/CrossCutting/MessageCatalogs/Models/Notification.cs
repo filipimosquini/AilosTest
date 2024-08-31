@@ -1,4 +1,4 @@
-﻿namespace Questao5.Infrastructure.CrossCutting.MessageCatalogs.Models;
+﻿namespace Questao5.BuildingBlocks.CrossCutting.MessageCatalogs.Models;
 
 public sealed class Notification
 {

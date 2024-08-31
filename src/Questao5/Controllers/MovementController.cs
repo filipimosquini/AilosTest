@@ -2,16 +2,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Questao5.Application.Commands.Movements;
 using Questao5.Application.Commands.Movements.Models;
-using Questao5.Infrastructure.Configurations.Controllers;
-using Questao5.Infrastructure.CrossCutting.MessageCatalogs.Interfaces;
 using System.Net;
 using System.Threading.Tasks;
 using Questao5.Application.Queries.Movements;
 using Questao5.Application.Queries.Movements.Models;
+using Questao5.BuildingBlocks.Controllers;
+using Questao5.BuildingBlocks.CrossCutting.MessageCatalogs.Interfaces;
 
 namespace Questao5.Controllers;
 
-[Route("api/movements")]
+[Route("api/banks/movements")]
 public class MovementController : BaseController<MovementController>
 {
     public MovementController(IMediator mediatorService, IMessageCatalog messageCatalog) 

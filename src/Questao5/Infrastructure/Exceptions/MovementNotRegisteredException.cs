@@ -1,4 +1,4 @@
-﻿using Questao5.Infrastructure.Configurations.Exceptions;
+﻿using Questao5.BuildingBlocks.Exceptions;
 using System.Net;
 
 namespace Questao5.Infrastructure.Exceptions;

@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using Questao5.Infrastructure.Configurations.Exceptions;
+using Questao5.BuildingBlocks.Exceptions;
 
 namespace Questao5.Infrastructure.Exceptions;
 

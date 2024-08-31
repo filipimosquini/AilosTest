@@ -2,7 +2,7 @@
 using Microsoft.Data.Sqlite;
 using System.Linq;
 
-namespace Questao5.Infrastructure.Database.Configs.Sqlite
+namespace Questao5.Infrastructure.Configurations.Database.Sqlite
 {
     public class DatabaseBootstrap : IDatabaseBootstrap
     {

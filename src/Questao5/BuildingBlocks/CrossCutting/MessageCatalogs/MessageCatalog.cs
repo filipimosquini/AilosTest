@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json.Linq;
-using Questao5.Infrastructure.CrossCutting.MessageCatalogs.Interfaces;
-using Questao5.Infrastructure.CrossCutting.MessageCatalogs.Models;
+using Questao5.BuildingBlocks.CrossCutting.MessageCatalogs.Interfaces;
+using Questao5.BuildingBlocks.CrossCutting.MessageCatalogs.Models;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Questao5.Infrastructure.CrossCutting.MessageCatalogs;
+namespace Questao5.BuildingBlocks.CrossCutting.MessageCatalogs;
 
 public class MessageCatalog : IMessageCatalog
 {
@@ -41,7 +41,7 @@ public class MessageCatalog : IMessageCatalog
                 {
                     var value = valueElement["value"];
 
-                    if (value == null || (value != null && (value["code"] == null || value["message"] == null)))
+                    if (value == null || value != null && (value["code"] == null || value["message"] == null))
                     {
                         continue;
                     }
