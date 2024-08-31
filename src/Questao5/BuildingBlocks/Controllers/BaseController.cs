@@ -4,9 +4,12 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Questao5.BuildingBlocks.CrossCutting.Extensions;
 using Questao5.BuildingBlocks.Exceptions;
 using Questao5.BuildingBlocks.CrossCutting.MessageCatalogs.Interfaces;
 using Questao5.BuildingBlocks.CrossCutting.MessageCatalogs.Models;
@@ -19,6 +22,11 @@ namespace Questao5.BuildingBlocks.Controllers;
 public abstract class BaseController<T> : Controller
 {
     /// <summary>
+    /// Gets or Sets the log service.
+    /// </summary>
+    protected ILogger _log { get; }
+
+    /// <summary>
     /// Gets or Sets the mediator service.
     /// </summary>
     protected IMediator _mediatorService { get; }
@@ -28,10 +36,18 @@ public abstract class BaseController<T> : Controller
     /// </summary>
     protected IMessageCatalog _messageCatalog { get; }
 
-    protected BaseController(IMediator mediatorService, IMessageCatalog messageCatalog)
+    /// <summary>
+    /// The constructor.
+    /// </summary>
+    /// <param name="loggerFactory"></param>
+    /// <param name="mediatorService"></param>
+    /// <param name="messageCatalog"></param>
+    protected BaseController(ILoggerFactory loggerFactory, IMediator mediatorService, IMessageCatalog messageCatalog)
     {
         _mediatorService = mediatorService;
         _messageCatalog = messageCatalog;
+
+        _log = loggerFactory.CreateLogger<T>();
     }
 
     /// <summary>
@@ -73,9 +89,9 @@ public abstract class BaseController<T> : Controller
         {
             return baseController.HandleValidationException(ex);
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            return baseController.HandleFatalError();
+            return baseController.HandleFatalError(ex);
         }
     }
 
@@ -83,9 +99,17 @@ public abstract class BaseController<T> : Controller
     /// <summary>
     /// Handle the exception result when fatal error occurs.
     /// </summary>
+    /// <param name="exception"> The exception. </param>
     /// <returns></returns>
-    private IActionResult HandleFatalError()
+    private IActionResult HandleFatalError(Exception exception)
     {
+        _log.LogCritical(new
+        {
+            timestamp = DateTime.UtcNow,
+            correlation = Guid.NewGuid().ToString(),
+            StackTrace = exception.StackTrace
+        }.ToJson());
+
         return StatusCode((int)HttpStatusCode.InternalServerError, new
         {
             notifications = _messageCatalog.Get("UNEXPECTED_ERROR")
@@ -99,6 +123,13 @@ public abstract class BaseController<T> : Controller
     /// <returns></returns>
     private IActionResult HandleAppCustomException(AppCustomException exception)
     {
+        _log.LogError(new
+        {
+            timestamp = DateTime.UtcNow,
+            correlation = Guid.NewGuid().ToString(),
+            StackTrace = exception.StackTrace
+        }.ToJson());
+
         if (string.IsNullOrWhiteSpace(exception.Message))
         {
             return StatusCode((int)exception.HttpStatusCode);

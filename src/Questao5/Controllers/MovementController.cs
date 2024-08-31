@@ -4,6 +4,7 @@ using Questao5.Application.Commands.Movements;
 using Questao5.Application.Commands.Movements.Models;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Questao5.Application.Queries.Movements;
 using Questao5.Application.Queries.Movements.Models;
 using Questao5.BuildingBlocks.Controllers;
@@ -14,8 +15,8 @@ namespace Questao5.Controllers;
 [Route("api/banks/movements")]
 public class MovementController : BaseController<MovementController>
 {
-    public MovementController(IMediator mediatorService, IMessageCatalog messageCatalog) 
-        : base(mediatorService, messageCatalog)
+    public MovementController(ILoggerFactory loggerFactory, IMediator mediatorService, IMessageCatalog messageCatalog) 
+        : base(loggerFactory, mediatorService, messageCatalog)
     {
     }
 

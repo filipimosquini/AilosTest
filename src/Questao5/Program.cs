@@ -25,7 +25,7 @@ builder.Services.AddControllers();
 // sqlite
 builder.Services.AddSingleton(new DatabaseConfig { Name = builder.Configuration.GetValue<string>("DatabaseName", "Data Source=database.sqlite") });
 builder.Services.AddSingleton<IDatabaseBootstrap, DatabaseBootstrap>();
-builder.Services.AddSingleton<IDbConnection>(provider => new SqliteConnection("Data Source=database.sqlite"));
+builder.Services.AddSingleton<IDbConnection>(provider => new SqliteConnection(builder.Configuration.GetValue<string>("DatabaseName", "Data Source=database.sqlite")));
 
 // Message Catalog
 builder.Services.AddSingleton<IMessageCatalog, MessageCatalog>();
