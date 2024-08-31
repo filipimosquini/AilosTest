@@ -40,15 +40,15 @@
     <Content Update="messages.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="Infrastructure\Configurations\Swagger\Definition\swagger.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <None Update="Infrastructure\Configurations\Swagger\Doc\readme.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\Configurations\Swagger\Definition\swagger.json" />
   </ItemGroup>
 
   <PropertyGroup>
