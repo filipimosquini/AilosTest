@@ -83,25 +83,16 @@
         ],
         "summary": "api/movements/balances.",
         "description": "<p>\r\n  <b> Desciption: </b>\r\n  <br />\r\n            This method get a balance result. <br /></p>\r\n<p>\r\n  <b> Requirements: </b>\r\n  <br />\r\n            Not Exists. <br /></p>",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetBalanceQuery"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetBalanceQuery"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetBalanceQuery"
-              }
+        "parameters": [
+          {
+            "name": "AccountNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -167,18 +158,26 @@
         },
         "additionalProperties": false
       },
-      "GetBalanceQuery": {
+      "GetBalanceQueryResponse": {
         "type": "object",
         "properties": {
           "accountNumber": {
             "type": "integer",
             "format": "int32"
+          },
+          "holder": {
+            "type": "string",
+            "nullable": true
+          },
+          "queryDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "balance": {
+            "type": "number",
+            "format": "double"
           }
         },
-        "additionalProperties": false
-      },
-      "GetBalanceQueryResponse": {
-        "type": "object",
         "additionalProperties": false
       }
     }

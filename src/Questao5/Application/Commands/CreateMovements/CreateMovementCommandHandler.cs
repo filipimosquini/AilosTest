@@ -1,46 +1,25 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
 using Questao5.Application.Commands.Movements.Models;
-using Questao5.Domain.Stores;
-using Questao5.Infrastructure.Exceptions;
+using Questao5.Domain.Services;
 using System.Threading;
 using System.Threading.Tasks;
-using Questao5.Infrastructure.Database.Movements.Models;
 
 namespace Questao5.Application.Commands.Movements;
 
 public class CreateMovementCommandHandler : IRequestHandler<CreateMovementCommand, CreateMovementCommandResponse>
 {
-    private readonly IMovementQueryStore _movementQueryStore;
-    private readonly IMovementCommandStore _movementCommandStore;
+    private readonly IMovementService _movementService;
 
-    public CreateMovementCommandHandler(IMovementQueryStore movementQueryStore, IMovementCommandStore movementCommandStore)
+    public CreateMovementCommandHandler(IMovementService movementService)
     {
-        _movementQueryStore = movementQueryStore;
-        _movementCommandStore = movementCommandStore;
+        _movementService = movementService;
     }
 
-    public async Task<CreateMovementCommandResponse> Handle(CreateMovementCommand request, CancellationToken cancellationToken)
+    public async Task<CreateMovementCommandResponse> Handle(CreateMovementCommand command, CancellationToken cancellationToken)
     {
-        var account = await _movementQueryStore.GetAccountAsync(request.AccountNumber);
+        await _movementService.ValidateAccountAsync(command.AccountNumber);
 
-        if (account is null)
-        {
-            throw new AccountNotFoundException();
-        }
-
-        if (!account.Active)
-        {
-            throw new AccountInactiveException();
-        }
-
-        var movementId = await _movementCommandStore.AddMovementAsync(new CreateMovementRequest()
-        {
-            AccountNumber = request.AccountNumber,
-            Amount = request.Amount,
-            MovimentDate = DateTime.UtcNow,
-            MovementType = request.MovementType
-        });
+        var movementId = await _movementService.CreateMovementAsync(command);
 
         return new CreateMovementCommandResponse()
         {

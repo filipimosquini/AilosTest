@@ -80,7 +80,11 @@ public class MovementController : BaseController<MovementController>
     /// <ul>
     /// <li>Inactive.Account</li>
     /// <li>Invalid.AccountNumber</li>
-    /// <li>NotFound.Account</li>
+    /// </ul>
+    /// </response>
+    /// <response code="404">Not Found
+    /// <ul>
+    ///     <li>NotFound.Account</li>
     /// </ul>
     /// </response>
     /// <response code="500"> InternalServerError
@@ -90,6 +94,6 @@ public class MovementController : BaseController<MovementController>
     /// </response>
     [HttpGet("balances")]
     [ProducesResponseType(typeof(GetBalanceQueryResponse), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetBalanceAsync([FromBody] GetBalanceQuery query)
+    public async Task<IActionResult> GetBalanceAsync([FromQuery] GetBalanceQuery query)
         => await ExecuteAsync(async () => await _mediatorService.Send(query));
 }
