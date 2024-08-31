@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Questao5.Infrastructure.Exceptions;
+namespace Questao5.Infrastructure.Configurations.Exceptions;
 
 public class AppCustomException : Exception
 {
@@ -9,6 +9,6 @@ public class AppCustomException : Exception
 
     public AppCustomException(string message, HttpStatusCode httpStatusCode) : base(message)
     {
-        this.HttpStatusCode = httpStatusCode;
+        HttpStatusCode = httpStatusCode;
     }
 }

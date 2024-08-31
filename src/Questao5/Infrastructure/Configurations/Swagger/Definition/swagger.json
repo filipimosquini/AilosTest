@@ -62,7 +62,13 @@
             }
           },
           "400": {
-            "description": "Bad Request\r\n            <ul><li>Inactive.Account</li><li>Invalid.AccountId</li><li>Invalid.Amount</li><li>Invalid.MovementType</li><li>Invalid.RequestId</li><li>NotFound.Account</li></ul>"
+            "description": "Bad Request\r\n            <ul><li>Inactive.Account</li><li>Invalid.AccountNumber</li><li>Invalid.Amount</li><li>Invalid.MovementType</li><li>Invalid.RequestId</li></ul>"
+          },
+          "404": {
+            "description": "Not Found\r\n            <ul><li>NotFound.Account</li></ul>"
+          },
+          "422": {
+            "description": "UnprocessableEntity\r\n            <ul><li>NotRegistered.Movement</li></ul>"
           },
           "500": {
             "description": "InternalServerError\r\n            <ul><li>Error.Unexpected</li></ul>"
@@ -118,7 +124,7 @@
             }
           },
           "400": {
-            "description": "Bad Request\r\n           <ul><li> Inactive.Account </li><li> NotFound.Account </li></ul>"
+            "description": "Bad Request\r\n           <ul><li>Inactive.Account</li><li>Invalid.AccountNumber</li><li>NotFound.Account</li></ul>"
           },
           "500": {
             "description": "InternalServerError\r\n           <ul><li> Error.Unexpected </li></ul>"
@@ -136,39 +142,44 @@
             "type": "string",
             "nullable": true
           },
-          "accountId": {
-            "type": "string",
-            "nullable": true
+          "accountNumber": {
+            "type": "integer",
+            "format": "int32"
           },
           "amount": {
             "type": "number",
             "format": "double"
           },
           "movementType": {
-            "$ref": "#/components/schemas/MovementTypeEnum"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
       "CreateMovementCommandResponse": {
         "type": "object",
+        "properties": {
+          "movementId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
         "additionalProperties": false
       },
       "GetBalanceQuery": {
         "type": "object",
+        "properties": {
+          "accountNumber": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
         "additionalProperties": false
       },
       "GetBalanceQueryResponse": {
         "type": "object",
         "additionalProperties": false
-      },
-      "MovementTypeEnum": {
-        "enum": [
-          0,
-          1
-        ],
-        "type": "integer",
-        "format": "int32"
       }
     }
   }

@@ -5,7 +5,7 @@ namespace Questao5.Domain.Enumerators;
 public enum MovementTypeEnum
 {
     [Description("Credit")]
-    C,
+    C = 'C',
     [Description("Debit")]
-    D
+    D = 'D'
 }

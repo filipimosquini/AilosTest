@@ -2,7 +2,6 @@
 using FluentValidation.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Questao5.Infrastructure.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +9,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Questao5.Infrastructure.CrossCutting.MessageCatalogs.Interfaces;
 using Questao5.Infrastructure.CrossCutting.MessageCatalogs.Models;
+using Questao5.Infrastructure.Configurations.Exceptions;
 
 namespace Questao5.Infrastructure.Configurations.Controllers;
 
@@ -73,7 +73,7 @@ public abstract class BaseController<T> : Controller
         {
             return baseController.HandleValidationException(ex);
         }
-        catch
+        catch (Exception exception)
         {
             return baseController.HandleFatalError();
         }

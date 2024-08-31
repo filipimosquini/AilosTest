@@ -36,11 +36,20 @@ public class MovementController : BaseController<MovementController>
     /// <response code="400">Bad Request
     /// <ul>
     ///     <li>Inactive.Account</li>
-    ///     <li>Invalid.AccountId</li>
+    ///     <li>Invalid.AccountNumber</li>
     ///     <li>Invalid.Amount</li>
     ///     <li>Invalid.MovementType</li>
     ///     <li>Invalid.RequestId</li>
+    /// </ul>
+    /// </response>
+    /// <response code="404">Not Found
+    /// <ul>
     ///     <li>NotFound.Account</li>
+    /// </ul>
+    /// </response>
+    /// <response code="422">UnprocessableEntity
+    /// <ul>
+    ///     <li>NotRegistered.Movement</li>
     /// </ul>
     /// </response>
     /// <response code="500">InternalServerError
@@ -69,8 +78,9 @@ public class MovementController : BaseController<MovementController>
     /// <response code="200"> OK </response>
     /// <response code="400"> Bad Request
     /// <ul>
-    /// <li> Inactive.Account </li>
-    /// <li> NotFound.Account </li>
+    /// <li>Inactive.Account</li>
+    /// <li>Invalid.AccountNumber</li>
+    /// <li>NotFound.Account</li>
     /// </ul>
     /// </response>
     /// <response code="500"> InternalServerError

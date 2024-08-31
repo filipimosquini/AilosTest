@@ -12,12 +12,12 @@
       ]
     },
     {
-      "Key": "INVALID_ACCOUNT_ID",
+      "Key": "INVALID_ACCOUNT_NUMBER",
       "values": [
         {
           "value": {
-            "code": "Invalid.AccountId",
-            "message": "Field 'AccountId' invalid."
+            "code": "Invalid.AccountNumber",
+            "message": "Field 'AccountNumber' invalid."
           }
         }
       ]
@@ -73,6 +73,17 @@
           "value": {
             "code": "Invalid.MovementType",
             "message": "Field 'Movementtype' invalid"
+          }
+        }
+      ]
+    },
+    {
+      "Key": "NOTREGISTERED_MOVEMENT",
+      "values": [
+        {
+          "value": {
+            "code": "NotRegistered.Movement",
+            "message": "Movement was not registered."
           }
         }
       ]
