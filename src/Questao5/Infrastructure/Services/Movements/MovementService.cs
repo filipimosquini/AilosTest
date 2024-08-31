@@ -24,11 +24,10 @@ public class MovementService : IMovementService
 
     public async Task<Guid> CreateMovementAsync(CreateMovementCommand command)
     {
-        var movementId = await _movementCommandStore.AddMovementAsync(new CreateMovementRequest()
+        var movementId = await _movementCommandStore.AddMovementAsync(new CreateMovementRequest
         {
             AccountNumber = command.AccountNumber,
             Amount = command.Amount,
-            MovimentDate = DateTime.UtcNow,
             MovementType = command.MovementType
         });
 

@@ -21,7 +21,7 @@ public class CreateMovementCommandHandler : IRequestHandler<CreateMovementComman
 
         var movementId = await _movementService.CreateMovementAsync(command);
 
-        return new CreateMovementCommandResponse()
+        return new CreateMovementCommandResponse
         {
             MovementId = movementId
         };

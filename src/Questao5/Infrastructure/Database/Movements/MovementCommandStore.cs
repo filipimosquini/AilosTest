@@ -28,7 +28,7 @@ VALUES (@id, @idcontacorrente, @datamovimento, @tipomovimento, @valor)
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("id", movementId, DbType.Guid);
         parameters.Add("idcontacorrente", request.AccountNumber, DbType.Int32);
-        parameters.Add("datamovimento", request.MovimentDate, DbType.Date);
+        parameters.Add("datamovimento", DateTime.UtcNow, DbType.Date);
         parameters.Add("valor", request.Amount, DbType.Double);
         parameters.Add("tipomovimento", request.MovementType, DbType.String);
 
