@@ -25,7 +25,7 @@ public class MovementController : BaseController<MovementController>
     /// </summary>
     /// <remarks>
     /// <p>
-    /// <b> Desciption: </b><br />
+    /// <b> Description: </b><br />
     /// This method create a movement. <br />
     /// </p>
     /// <p>
@@ -68,7 +68,7 @@ public class MovementController : BaseController<MovementController>
     /// </summary>
     /// <remarks>
     /// <p>
-    /// <b> Desciption: </b><br />
+    /// <b> Description: </b><br />
     /// This method get a balance result. <br />
     /// </p>
     /// <p>

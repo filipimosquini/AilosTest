@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Questao5.Infrastructure.Database.Idepotencies.Models;
+namespace Questao5.Infrastructure.Database.Idempotencies.Models;
 
 public class CreateIdepotencyRequest
 {

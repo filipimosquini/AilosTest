@@ -13,12 +13,12 @@ using Questao5.Domain.Stores;
 using Questao5.Infrastructure.Configurations.Database.Sqlite;
 using Questao5.Infrastructure.Configurations.Extensions;
 using Questao5.Infrastructure.Configurations.Middlewares;
-using Questao5.Infrastructure.Database.Idepotencies;
+using Questao5.Infrastructure.Database.Idempotencies;
 using Questao5.Infrastructure.Database.Movements;
 using Questao5.Infrastructure.Services.Movements;
 using System.Data;
 using System.Reflection;
-using Questao5.Infrastructure.Services.Idepotencies;
+using Questao5.Infrastructure.Services.Idempotencies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,9 +45,9 @@ builder.Services.AddScoped<IMovementQueryStore, MovementQueryStore>();
 builder.Services.AddScoped<IMovementCommandStore, MovementCommandStore>();
 builder.Services.AddScoped<IMovementService, MovementService>();
 
-builder.Services.AddTransient<IIdepotencyQueryStore, IdepotencyQueryStore>();
-builder.Services.AddTransient<IIdepotencyCommandStore, IdepotencyCommandStore>();
-builder.Services.AddTransient<IIdepotencyService, IdepotencyService>();
+builder.Services.AddTransient<IIdempotencyQueryStore, IdempotencyQueryStore>();
+builder.Services.AddTransient<IIdempotencyCommandStore, IdempotencyCommandStore>();
+builder.Services.AddTransient<IIdempotencyService, IdempotencyService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -65,8 +65,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-// Idepotency
-app.UseMiddleware<IdepotencyValidationMiddleware>();
+// Idempotency
+app.UseMiddleware<IdempotencyValidationMiddleware>();
 
 app.MapControllers();
 

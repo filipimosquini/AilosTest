@@ -5,18 +5,18 @@ using Questao5.Domain.Stores;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace Questao5.Infrastructure.Database.Idepotencies;
+namespace Questao5.Infrastructure.Database.Idempotencies;
 
-public class IdepotencyQueryStore : IIdepotencyQueryStore
+public class IdempotencyQueryStore : IIdempotencyQueryStore
 {
     private readonly IDbConnection _dbConnection;
 
-    public IdepotencyQueryStore(IDbConnection dbConnection)
+    public IdempotencyQueryStore(IDbConnection dbConnection)
     {
         _dbConnection = dbConnection;
     }
 
-    public async Task<Idepotency> GetIdepotencyAsync(Guid idepotencyToken)
+    public async Task<Idempotency> GetIdepotencyAsync(Guid idepotencyToken)
     {
         string sql = @"
                         SELECT
@@ -30,6 +30,6 @@ public class IdepotencyQueryStore : IIdepotencyQueryStore
         DynamicParameters parameters = new DynamicParameters();
         parameters.Add("chave_idempotencia", idepotencyToken, DbType.Guid);
 
-        return await _dbConnection.QueryFirstOrDefaultAsync<Idepotency>(sql, parameters);
+        return await _dbConnection.QueryFirstOrDefaultAsync<Idempotency>(sql, parameters);
     }
 }

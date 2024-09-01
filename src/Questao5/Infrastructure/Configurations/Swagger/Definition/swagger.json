@@ -20,7 +20,7 @@
           "Movement"
         ],
         "summary": "api/movements.",
-        "description": "<p>\r\n  <b> Desciption: </b>\r\n  <br />\r\n            This method create a movement. <br /></p>\r\n<p>\r\n  <b> Requirements: </b>\r\n  <br />\r\n            Not Exists. <br /></p>",
+        "description": "<p>\r\n  <b> Description: </b>\r\n  <br />\r\n            This method create a movement. <br /></p>\r\n<p>\r\n  <b> Requirements: </b>\r\n  <br />\r\n            Not Exists. <br /></p>",
         "requestBody": {
           "content": {
             "application/json": {
@@ -82,7 +82,7 @@
           "Movement"
         ],
         "summary": "api/movements/balances.",
-        "description": "<p>\r\n  <b> Desciption: </b>\r\n  <br />\r\n            This method get a balance result. <br /></p>\r\n<p>\r\n  <b> Requirements: </b>\r\n  <br />\r\n            Not Exists. <br /></p>",
+        "description": "<p>\r\n  <b> Description: </b>\r\n  <br />\r\n            This method get a balance result. <br /></p>\r\n<p>\r\n  <b> Requirements: </b>\r\n  <br />\r\n            Not Exists. <br /></p>",
         "parameters": [
           {
             "name": "AccountNumber",
@@ -193,7 +193,7 @@
             "type": "string",
             "description": "A datetime when query occurs",
             "format": "date-time",
-            "example": ""
+            "example": "2024-09-01T14:38:40.2212991Z"
           },
           "balance": {
             "type": "number",

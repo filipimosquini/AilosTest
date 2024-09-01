@@ -2,7 +2,7 @@
 
 namespace Questao5.Domain.Entities;
 
-public class Idepotency
+public class Idempotency
 {
     public string Id { get; set; }
     public string Request { get; set; }

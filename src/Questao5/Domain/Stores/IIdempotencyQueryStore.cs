@@ -4,7 +4,7 @@ using System;
 
 namespace Questao5.Domain.Stores;
 
-public interface IIdepotencyQueryStore
+public interface IIdempotencyQueryStore
 {
-    Task<Idepotency> GetIdepotencyAsync(Guid idepotencyToken);
+    Task<Idempotency> GetIdepotencyAsync(Guid idepotencyToken);
 }

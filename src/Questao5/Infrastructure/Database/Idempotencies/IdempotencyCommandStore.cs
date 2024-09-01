@@ -1,17 +1,17 @@
 ﻿using Dapper;
 using Questao5.Domain.Stores;
-using Questao5.Infrastructure.Database.Idepotencies.Models;
+using Questao5.Infrastructure.Database.Idempotencies.Models;
 using Questao5.Infrastructure.Exceptions;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace Questao5.Infrastructure.Database.Idepotencies;
+namespace Questao5.Infrastructure.Database.Idempotencies;
 
-public class IdepotencyCommandStore : IIdepotencyCommandStore
+public class IdempotencyCommandStore : IIdempotencyCommandStore
 {
     private readonly IDbConnection _dbConnection;
 
-    public IdepotencyCommandStore(IDbConnection dbConnection)
+    public IdempotencyCommandStore(IDbConnection dbConnection)
     {
         _dbConnection = dbConnection;
     }

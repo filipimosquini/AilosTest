@@ -57,7 +57,7 @@
             <summary>
             A datetime when query occurs
             </summary>
-            <example></example>
+            <example>2024-09-01T14:38:40.2212991Z</example>
         </member>
         <member name="P:Questao5.Application.Queries.Movements.Models.GetBalanceQueryResponse.Balance">
             <summary>
@@ -154,7 +154,7 @@
             </summary>
             <remarks>
             <p>
-            <b> Desciption: </b><br />
+            <b> Description: </b><br />
             This method create a movement. <br />
             </p>
             <p>
@@ -194,7 +194,7 @@
             </summary>
             <remarks>
             <p>
-            <b> Desciption: </b><br />
+            <b> Description: </b><br />
             This method get a balance result. <br />
             </p>
             <p>

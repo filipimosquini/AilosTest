@@ -12,15 +12,15 @@ using System.Threading.Tasks;
 
 namespace Questao5.Infrastructure.Configurations.Middlewares;
 
-public class IdepotencyValidationMiddleware
+public class IdempotencyValidationMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly IIdepotencyService _idepotencyService;
+    private readonly IIdempotencyService _idempotencyService;
 
-    public IdepotencyValidationMiddleware(RequestDelegate next, IIdepotencyService idepotencyService)
+    public IdempotencyValidationMiddleware(RequestDelegate next, IIdempotencyService idempotencyService)
     {
         _next = next;
-        _idepotencyService = idepotencyService;
+        _idempotencyService = idempotencyService;
     }
 
     public async Task InvokeAsync(HttpContext context)
@@ -70,7 +70,7 @@ public class IdepotencyValidationMiddleware
             return;
         }
 
-        var idepotency = await _idepotencyService.CreateIdepotencyAsync(Guid.Parse(requestBodyObject["requestId"]?.ToString()), requestBody);
+        var idepotency = await _idempotencyService.CreateIdepotencyAsync(Guid.Parse(requestBodyObject["requestId"]?.ToString()), requestBody);
 
         if (!idepotency.Created && idepotency.HasResponse)
         {
@@ -95,7 +95,7 @@ public class IdepotencyValidationMiddleware
 
         if (context.Response.StatusCode < StatusCodes.Status400BadRequest)
         {
-            await _idepotencyService.UpdateIdepotencyAsync(Guid.Parse(requestBodyObject["requestId"]?.ToString()),
+            await _idempotencyService.UpdateIdepotencyAsync(Guid.Parse(requestBodyObject["requestId"]?.ToString()),
                 await ReadBodyFromResponseAsync(context.Response));
         }
 

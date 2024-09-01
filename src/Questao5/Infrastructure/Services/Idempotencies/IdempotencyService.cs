@@ -1,20 +1,20 @@
 ﻿using Questao5.Domain.Services;
 using Questao5.Domain.Stores;
-using Questao5.Infrastructure.Database.Idepotencies.Models;
+using Questao5.Infrastructure.Database.Idempotencies.Models;
 using System;
 using System.Threading.Tasks;
 
-namespace Questao5.Infrastructure.Services.Idepotencies;
+namespace Questao5.Infrastructure.Services.Idempotencies;
 
-public class IdepotencyService : IIdepotencyService
+public class IdempotencyService : IIdempotencyService
 {
-    private readonly IIdepotencyQueryStore _idepotencyQueryStore;
-    private readonly IIdepotencyCommandStore _idepotencyCommandStore;
+    private readonly IIdempotencyQueryStore _idempotencyQueryStore;
+    private readonly IIdempotencyCommandStore _idempotencyCommandStore;
 
-    public IdepotencyService(IIdepotencyQueryStore idepotencyQueryStore, IIdepotencyCommandStore idepotencyCommandStore)
+    public IdempotencyService(IIdempotencyQueryStore idempotencyQueryStore, IIdempotencyCommandStore idempotencyCommandStore)
     {
-        _idepotencyQueryStore = idepotencyQueryStore;
-        _idepotencyCommandStore = idepotencyCommandStore;
+        _idempotencyQueryStore = idempotencyQueryStore;
+        _idempotencyCommandStore = idempotencyCommandStore;
     }
 
     public async Task<(bool Created, bool RequestOverwrited, bool HasResponse, string Request, string Response)> CreateIdepotencyAsync(Guid idepotencyToken, string jsonRequest)
@@ -24,11 +24,11 @@ public class IdepotencyService : IIdepotencyService
             return(false, false, false, jsonRequest, string.Empty);
         }
 
-        var idepotency = await _idepotencyQueryStore.GetIdepotencyAsync(idepotencyToken);
+        var idepotency = await _idempotencyQueryStore.GetIdepotencyAsync(idepotencyToken);
 
         if (idepotency is null)
         {
-            await _idepotencyCommandStore.AddIdepotencyAsync(new CreateIdepotencyRequest
+            await _idempotencyCommandStore.AddIdepotencyAsync(new CreateIdepotencyRequest
             {
                 Id = idepotencyToken,
                 Request = jsonRequest
@@ -52,14 +52,14 @@ public class IdepotencyService : IIdepotencyService
             return;
         }
 
-        var idepotency = await _idepotencyQueryStore.GetIdepotencyAsync(idepotencyToken);
+        var idepotency = await _idempotencyQueryStore.GetIdepotencyAsync(idepotencyToken);
 
         if (idepotency is null)
         {
             return;
         }
 
-        await _idepotencyCommandStore.UpdateIdepotencyResponse(new UpdateIdepotencyRequest
+        await _idempotencyCommandStore.UpdateIdepotencyResponse(new UpdateIdepotencyRequest
         {
             Id = idepotencyToken,
             Response = jsonResponse
