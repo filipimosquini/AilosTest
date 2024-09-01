@@ -11,6 +11,15 @@
 
 Na tabela **movimento**, a linha  ``` FOREIGN KEY(idcontacorrente) REFERENCES contacorrente(idcontacorrente) ``` está referenciando a coluna **idcontacorrente** e esta coluna na tabela **contacorrente** é do tipo ``` TEXT(37) PRIMARY KEY  ``` porém, FOREIGN KEY **idcontacorrente** presenta na tabela **movimento** é do tipo ``` INTEGER(10) NOT NULL ```, por isso, alterei o script para ``` FOREIGN KEY(idcontacorrente) REFERENCES contacorrente(numero) ``` pois também, a coluna **número** na tabela **contacorrente** está declarada também commo ``` UNIQUE ```.
 
+## Frameworks e Ferramentas principais utilizados
+
+1. Linguagem de programação C# e projeto WebAPI na plataforma .NET 6
+2. Mediatr
+3. FluentValidation
+4. Dapper
+5. Banco de dados SQLite
+6. Swagger (Documentação)
+
 # Estrutura do projeto
 
 O projeto e estruturado com as seguintes camadas
