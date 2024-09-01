@@ -25,30 +25,48 @@ public class IdepotencyValidationMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
-        // Temporarily replace the HttpResponseStream, which is a write-only stream, with a MemoryStream to capture it's value in-flight.
+        var requestBody = await ReadBodyFromRequestAsync(context.Request);
+
+        if(string.IsNullOrWhiteSpace(requestBody))
+        {
+            await _next(context);
+            return;
+        }
+
         var originalResponseBody = context.Response.Body;
         using var newResponseBody = new MemoryStream();
         context.Response.Body = newResponseBody;
 
-        var requestBody = await ReadBodyFromRequestAsync(context.Request);
+        if (!string.IsNullOrWhiteSpace(context.Request.ContentType) && 
+            (context.Request.ContentType.Contains("application/json") && !requestBody.IsValidJson()))
+        {
+            await ReturnsResponseForInvalidRequestAsync(context);
 
-        if (string.IsNullOrWhiteSpace(requestBody))
+            newResponseBody.Seek(0, SeekOrigin.Begin);
+            await newResponseBody.CopyToAsync(originalResponseBody);
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(context.Request.ContentType) ||
+            (!string.IsNullOrWhiteSpace(context.Request.ContentType) &&
+            !context.Request.ContentType.Contains("application/json")))
         {
             await _next(context);
+
+            newResponseBody.Seek(0, SeekOrigin.Begin);
+            await newResponseBody.CopyToAsync(originalResponseBody);
             return;
         }
 
         var requestBodyObject = JObject.Parse(requestBody!);
 
-        if (string.IsNullOrWhiteSpace(requestBodyObject["requestId"]?.ToString()))
+        if (string.IsNullOrWhiteSpace(requestBodyObject["requestId"]?.ToString()) || 
+            !Guid.TryParse(requestBodyObject["requestId"]?.ToString(), out _))
         {
             await _next(context);
-            return;
-        }
 
-        if (!Guid.TryParse(requestBodyObject["requestId"]?.ToString(), out _))
-        {
-            await _next(context);
+            newResponseBody.Seek(0, SeekOrigin.Begin);
+            await newResponseBody.CopyToAsync(originalResponseBody);
             return;
         }
 
@@ -57,6 +75,9 @@ public class IdepotencyValidationMiddleware
         if (!idepotency.Created && idepotency.HasResponse)
         {
             await OverwriteResponseBodyAndReturnByMiddlewareAsync(context, idepotency.Response);
+
+            newResponseBody.Seek(0, SeekOrigin.Begin);
+            await newResponseBody.CopyToAsync(originalResponseBody);
             return;
         }
 
@@ -65,7 +86,11 @@ public class IdepotencyValidationMiddleware
             await _next(await OverwriteRequestBodyAsync(context, idepotency.Request));
         }
 
-        // Define offset flow position from stream. In this case, define flow to begin
+        if (idepotency.Created && !idepotency.HasResponse && !idepotency.RequestOverwrited)
+        {
+            await _next(context);
+        }
+
         newResponseBody.Seek(0, SeekOrigin.Begin);
 
         if (context.Response.StatusCode < StatusCodes.Status400BadRequest)
@@ -79,13 +104,11 @@ public class IdepotencyValidationMiddleware
 
     public virtual async Task<string?> ReadBodyFromRequestAsync(HttpRequest request)
     {
-        // Ensure the request's body can be read multiple times (for the next middlewares in the pipeline).
         request.EnableBuffering();
 
         using var streamReader = new StreamReader(request.Body, leaveOpen: true);
         var requestBody = await streamReader.ReadToEndAsync();
 
-        // Reset the request's body stream position for next middleware in the pipeline.
         request.Body.Position = 0;
 
         if (request.ContentType is not null && request.ContentType.Contains("application/json"))
@@ -100,8 +123,7 @@ public class IdepotencyValidationMiddleware
     {
         using var streamReader = new StreamReader(response.Body, leaveOpen: true);
         var responseBody = await streamReader.ReadToEndAsync();
-
-        // Reset the response's body stream position for next middleware in the pipeline.
+        
         response.Body.Position = 0;
 
         if (response.ContentType is not null && response.ContentType.Contains("application/json"))
@@ -125,5 +147,14 @@ public class IdepotencyValidationMiddleware
         context.Response.StatusCode = StatusCodes.Status200OK;
         context.Response.ContentType = "application/json";
         await context.Response.WriteAsync(JsonConvert.SerializeObject(responseBody.FromJson<object>()));
+    }
+
+    public virtual async Task ReturnsResponseForInvalidRequestAsync(HttpContext context)
+    {
+        var json = @"{""notifications"": [{""code"": ""Invalid.Request"",""message"": ""The request is invalid or malformed.""}]}";
+        context.Response.StatusCode = StatusCodes.Status400BadRequest;
+        context.Response.ContentType = "application/json";
+
+        await context.Response.WriteAsync(JsonConvert.SerializeObject(json.FromJson<object>(), Formatting.Indented));
     }
 }

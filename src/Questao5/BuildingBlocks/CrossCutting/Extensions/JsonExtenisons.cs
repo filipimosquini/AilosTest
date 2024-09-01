@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
 namespace Questao5.BuildingBlocks.CrossCutting.Extensions;
@@ -37,4 +38,36 @@ public static class JsonExtenisons
         => source == null
             ? (string)null
             : JsonConvert.SerializeObject(source, Formatting.Indented, JsonSerializerSettings);
+
+    public static bool IsValidJson(this string json)
+    {
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            return false;
+        }
+
+        json = json.Trim();
+
+        if ((json.StartsWith("{") && json.EndsWith("}")) ||
+            (json.StartsWith("[") && json.EndsWith("]")))
+        {
+            try
+            {
+                var obj = JToken.Parse(json);
+                return true;
+            }
+            catch (JsonReaderException)
+            {
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
