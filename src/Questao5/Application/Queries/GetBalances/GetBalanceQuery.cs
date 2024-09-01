@@ -8,5 +8,6 @@ public class GetBalanceQuery : IRequest<GetBalanceQueryResponse>
     /// <summary>
     /// The bank account number
     /// </summary>
+    /// <example>123</example>
     public int AccountNumber { get; set; }
 }

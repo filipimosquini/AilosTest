@@ -90,8 +90,10 @@
             "description": "The bank account number",
             "schema": {
               "type": "integer",
-              "format": "int32"
-            }
+              "format": "int32",
+              "example": 123
+            },
+            "example": 123
           }
         ],
         "responses": {
@@ -135,23 +137,27 @@
         "properties": {
           "requestId": {
             "type": "string",
-            "description": "The request Id",
-            "nullable": true
+            "description": "The request Id used for idempotency verification.",
+            "nullable": true,
+            "example": "25561a63-fe01-41fb-bb97-87e4a9b64ac1"
           },
           "accountNumber": {
             "type": "integer",
             "description": "The bank account number",
-            "format": "int32"
+            "format": "int32",
+            "example": 123
           },
           "amount": {
             "type": "number",
             "description": "The amount of bank movement",
-            "format": "double"
+            "format": "double",
+            "example": 300
           },
           "movementType": {
             "type": "string",
             "description": "The Movement Types.\r\nThe accepted values is [C] Credit or [D] Debit",
-            "nullable": true
+            "nullable": true,
+            "example": "C"
           }
         },
         "additionalProperties": false
@@ -162,7 +168,8 @@
           "movementId": {
             "type": "string",
             "description": "The movement id generated after store a bank movement",
-            "format": "uuid"
+            "format": "uuid",
+            "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
           }
         },
         "additionalProperties": false
@@ -173,22 +180,26 @@
           "accountNumber": {
             "type": "integer",
             "description": "The bank account number",
-            "format": "int32"
+            "format": "int32",
+            "example": 123
           },
           "holder": {
             "type": "string",
             "description": "The holder of bank account",
-            "nullable": true
+            "nullable": true,
+            "example": "Katherine Sanchez"
           },
           "queryDate": {
             "type": "string",
             "description": "A datetime when query occurs",
-            "format": "date-time"
+            "format": "date-time",
+            "example": ""
           },
           "balance": {
             "type": "number",
             "description": "The balance of bank movements",
-            "format": "double"
+            "format": "double",
+            "example": 1000.5
           }
         },
         "additionalProperties": false

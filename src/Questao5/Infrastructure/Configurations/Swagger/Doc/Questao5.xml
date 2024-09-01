@@ -6,54 +6,64 @@
     <members>
         <member name="P:Questao5.Application.Commands.Movements.CreateMovementCommand.RequestId">
             <summary>
-            The request Id
+            The request Id used for idempotency verification.
             </summary>
+            <example>25561a63-fe01-41fb-bb97-87e4a9b64ac1</example>
         </member>
         <member name="P:Questao5.Application.Commands.Movements.CreateMovementCommand.AccountNumber">
             <summary>
             The bank account number
             </summary>
+            <example>123</example>
         </member>
         <member name="P:Questao5.Application.Commands.Movements.CreateMovementCommand.Amount">
             <summary>
             The amount of bank movement
             </summary>
+            <example>300</example>
         </member>
         <member name="P:Questao5.Application.Commands.Movements.CreateMovementCommand.MovementType">
             <summary>
             The Movement Types.
             The accepted values is [C] Credit or [D] Debit
             </summary>
+            <example>C</example>
         </member>
         <member name="P:Questao5.Application.Commands.Movements.Models.CreateMovementCommandResponse.MovementId">
             <summary>
             The movement id generated after store a bank movement
             </summary>
+            <example>3fa85f64-5717-4562-b3fc-2c963f66afa6</example>
         </member>
         <member name="P:Questao5.Application.Queries.Movements.GetBalanceQuery.AccountNumber">
             <summary>
             The bank account number
             </summary>
+            <example>123</example>
         </member>
         <member name="P:Questao5.Application.Queries.Movements.Models.GetBalanceQueryResponse.AccountNumber">
             <summary>
             The bank account number
             </summary>
+            <example>123</example>
         </member>
         <member name="P:Questao5.Application.Queries.Movements.Models.GetBalanceQueryResponse.Holder">
             <summary>
             The holder of bank account
             </summary>
+            <example>Katherine Sanchez</example>
         </member>
         <member name="P:Questao5.Application.Queries.Movements.Models.GetBalanceQueryResponse.QueryDate">
             <summary>
             A datetime when query occurs
             </summary>
+            <example></example>
         </member>
         <member name="P:Questao5.Application.Queries.Movements.Models.GetBalanceQueryResponse.Balance">
             <summary>
             The balance of bank movements 
             </summary>
+            <example>1000.50</example> 
         </member>
         <member name="T:Questao5.BuildingBlocks.Controllers.BaseController`1">
             <summary>
