@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -22,6 +23,15 @@ public static class JsonExtenisons
         }
     };
 
+    public static T FromJson<T>(this string json)
+        => string.IsNullOrWhiteSpace(json) ? default : JsonConvert.DeserializeObject<T>(json);
+
+
+    public static T FromJson<T>(this string json, JsonSerializerSettings jsonSerializerSettings)
+        => string.IsNullOrWhiteSpace(json) ? default : 
+            jsonSerializerSettings != null ? 
+                JsonConvert.DeserializeObject<T>(json, jsonSerializerSettings) 
+                : throw new ArgumentNullException(nameof(jsonSerializerSettings));
 
     public static string ToJson(this object source)
         => source == null

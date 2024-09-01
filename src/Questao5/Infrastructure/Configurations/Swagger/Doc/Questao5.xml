@@ -60,6 +60,11 @@
             Base controller class.
             </summary>
         </member>
+        <member name="P:Questao5.BuildingBlocks.Controllers.BaseController`1._log">
+            <summary>
+            Gets or Sets the log service.
+            </summary>
+        </member>
         <member name="P:Questao5.BuildingBlocks.Controllers.BaseController`1._mediatorService">
             <summary>
             Gets or Sets the mediator service.
@@ -69,6 +74,14 @@
             <summary>
             Gets the message catalog.
             </summary>
+        </member>
+        <member name="M:Questao5.BuildingBlocks.Controllers.BaseController`1.#ctor(Microsoft.Extensions.Logging.ILoggerFactory,MediatR.IMediator,Questao5.BuildingBlocks.CrossCutting.MessageCatalogs.Interfaces.IMessageCatalog)">
+            <summary>
+            The constructor.
+            </summary>
+            <param name="loggerFactory"></param>
+            <param name="mediatorService"></param>
+            <param name="messageCatalog"></param>
         </member>
         <member name="M:Questao5.BuildingBlocks.Controllers.BaseController`1.ExecuteAsync``1(System.Func{System.Threading.Tasks.Task{``0}})">
             <summary>
@@ -87,10 +100,11 @@
             <param name="httpStatusCode">The response code.</param>
             <returns></returns>
         </member>
-        <member name="M:Questao5.BuildingBlocks.Controllers.BaseController`1.HandleFatalError">
+        <member name="M:Questao5.BuildingBlocks.Controllers.BaseController`1.HandleFatalError(System.Exception)">
             <summary>
             Handle the exception result when fatal error occurs.
             </summary>
+            <param name="exception"> The exception. </param>
             <returns></returns>
         </member>
         <member name="M:Questao5.BuildingBlocks.Controllers.BaseController`1.HandleAppCustomException(Questao5.BuildingBlocks.Exceptions.AppCustomException)">

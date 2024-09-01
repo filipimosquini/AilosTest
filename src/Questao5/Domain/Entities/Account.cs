@@ -2,7 +2,7 @@
 
 public class Account
 {
-    public string? Id { get; set; }
+    public string Id { get; set; }
 
     public int Number { get; set; }
 
