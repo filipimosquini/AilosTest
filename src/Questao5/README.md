@@ -30,6 +30,15 @@ O projeto e estruturado com as seguintes camadas
 5. BuildingBlocks: Contém as classes que compôem a base para o funcionamento do projeto.
 6. Tests: Contém os testes de unidade.
 
+# Documentação da API
+
+![image](https://github.com/user-attachments/assets/a88b5d2e-e0a4-4210-9784-c19a20203394)
+
+![image](https://github.com/user-attachments/assets/7deb0539-aae7-4acb-be5d-7ede7a681293)
+
+![image](https://github.com/user-attachments/assets/dfeea39a-2cc9-404f-a7e8-7634d162e6f7)
+
+
 # Enunciado
 
 Um banco que já possui uma API REST, necessita que você desenvolva duas novas funcionalidades:
